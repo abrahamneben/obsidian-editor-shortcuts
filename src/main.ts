@@ -1,4 +1,4 @@
-import { Plugin } from 'obsidian';
+import { Plugin, EditorPosition } from 'obsidian';
 import {
   addCursorsToSelectionEnds,
   copyLine,
@@ -280,6 +280,26 @@ export default class CodeEditorShortcuts extends Plugin {
         const lineCount = editor.lineCount();
         const onSubmit = (line: number) => editor.setCursor({ line, ch: 0 });
         new GoToLineModal(this.app, lineCount, onSubmit).open();
+      },
+    });
+
+    this.addCommand({
+      id: 'moveCursor10LinesUp',
+      name: 'Move cursor 10 lines up',
+      editorCallback: (editor) => {
+        const pos = editor.getCursor();
+        const newPos: EditorPosition = {line: pos.line - 10, ch: 0}
+        editor.setCursor(newPos);
+      },
+    });
+
+    this.addCommand({
+      id: 'moveCursor10LinesDown',
+      name: 'Move cursor 10 lines down',
+      editorCallback: (editor) => {
+        const pos = editor.getCursor();
+        const newPos: EditorPosition = {line: pos.line + 10, ch: 0}
+        editor.setCursor(newPos);
       },
     });
 
