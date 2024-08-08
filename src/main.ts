@@ -18,6 +18,10 @@ import {
   isProgrammaticSelectionChange,
   selectAllOccurrences,
   selectLine,
+  select5LinesDown,
+  select5LinesUp,
+  select10LinesDown,
+  select10LinesUp,
   selectWordOrNextOccurrence,
   setIsManualSelection,
   setIsProgrammaticSelectionChange,
@@ -202,6 +206,30 @@ export default class CodeEditorShortcuts extends Plugin {
     });
 
     this.addCommand({
+      id: 'select5LinesDown',
+      name: 'Select 5 lines down',
+      editorCallback: (editor) => withMultipleSelections(editor, select5LinesDown),
+    });
+
+    this.addCommand({
+      id: 'select5LinesUp',
+      name: 'Select 5 lines up',
+      editorCallback: (editor) => withMultipleSelections(editor, select5LinesUp),
+    });
+
+    this.addCommand({
+      id: 'select10LinesDown',
+      name: 'Select 10 lines down',
+      editorCallback: (editor) => withMultipleSelections(editor, select10LinesDown),
+    });
+
+    this.addCommand({
+      id: 'select10LinesUp',
+      name: 'Select 10 lines up',
+      editorCallback: (editor) => withMultipleSelections(editor, select10LinesUp),
+    });
+
+    this.addCommand({
       id: 'addCursorsToSelectionEnds',
       name: 'Add cursors to selection ends',
       hotkeys: [
@@ -299,6 +327,26 @@ export default class CodeEditorShortcuts extends Plugin {
       editorCallback: (editor) => {
         const pos = editor.getCursor();
         const newPos: EditorPosition = {line: pos.line + 10, ch: 0}
+        editor.setCursor(newPos);
+      },
+    });
+
+    this.addCommand({
+      id: 'moveCursor5LinesUp',
+      name: 'Move cursor 5 lines up',
+      editorCallback: (editor) => {
+        const pos = editor.getCursor();
+        const newPos: EditorPosition = {line: pos.line - 5, ch: 0}
+        editor.setCursor(newPos);
+      },
+    });
+
+    this.addCommand({
+      id: 'moveCursor5LinesDown',
+      name: 'Move cursor 5 lines down',
+      editorCallback: (editor) => {
+        const pos = editor.getCursor();
+        const newPos: EditorPosition = {line: pos.line + 5, ch: 0}
         editor.setCursor(newPos);
       },
     });

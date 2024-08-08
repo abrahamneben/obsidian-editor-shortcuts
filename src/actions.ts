@@ -404,6 +404,26 @@ export const selectLine = (_editor: Editor, selection: EditorSelection) => {
   return { anchor: startOfCurrentLine, head: startOfNextLine };
 };
 
+export const select5LinesDown = (_editor: Editor, selection: EditorSelection) => {
+  const new_hd: EditorPosition = {line:selection.head.line+5, ch:selection.head.ch};
+  return { anchor: selection.anchor, head: new_hd };
+};
+
+export const select10LinesDown = (_editor: Editor, selection: EditorSelection) => {
+  const new_hd: EditorPosition = {line:selection.head.line+10, ch:selection.head.ch};
+  return { anchor: selection.anchor, head: new_hd };
+};
+
+export const select5LinesUp = (_editor: Editor, selection: EditorSelection) => {
+  const new_hd: EditorPosition = {line:selection.head.line-5, ch:selection.head.ch};
+  return { anchor: selection.anchor, head: new_hd };
+};
+
+export const select10LinesUp = (_editor: Editor, selection: EditorSelection) => {
+  const new_hd: EditorPosition = {line:selection.head.line-10, ch:selection.head.ch};
+  return { anchor: selection.anchor, head: new_hd };
+};
+
 export const addCursorsToSelectionEnds = (
   editor: Editor,
   emulate: CODE_EDITOR = CODE_EDITOR.VSCODE,
